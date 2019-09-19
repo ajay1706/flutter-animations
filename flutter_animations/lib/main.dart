@@ -68,7 +68,7 @@ AnimationController animationController ; // Its another object which generates 
 //AnimatedWidget help in creating and setting states of aimation here rather than thier in the UI and logic part
 //The Purpose of using this as now we don't need the setState or addListener method
 class AnimatedLogo extends AnimatedWidget{
-final Tween<double> _sizeAnim = Tween<double>(begin:50,end: 100);
+final Tween<double> _sizeAnim = Tween<double>(begin:30,end: 180);
   AnimatedLogo(
 {Key key, Animation animation}): 
 super(key:key , listenable:animation);
@@ -80,11 +80,16 @@ super(key:key , listenable:animation);
     return Opacity( 
       opacity: animation.value,
      
-     
-      child: Container(
-        height: _sizeAnim.evaluate(animation),
-        width: 100,
-        child: FlutterLogo(),
+     //Transform.rotate roates your widget
+     //angle takes up the angle values....
+     // we change the begin to 30 and end to 180
+      child: Transform.rotate(
+        angle:_sizeAnim.evaluate(animation) ,
+              child: Container(
+          height: 100,
+          width: 100,
+          child: FlutterLogo(),
+        ),
       ),
     );
   }
