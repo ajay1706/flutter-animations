@@ -30,7 +30,7 @@ AnimationController animationController ; // Its another object which generates 
 
     //vsync is argument which prevents off screen animations from consuming un necessary sources
     animationController =
-             AnimationController(vsync: this, duration: Duration(milliseconds: 2500));
+             AnimationController(vsync: this, duration: Duration(milliseconds: 4000));
 
 
              //here we are using the Tween Animation to set the begin and end duration and you can use another like Curved too.
@@ -68,7 +68,7 @@ AnimationController animationController ; // Its another object which generates 
 //AnimatedWidget help in creating and setting states of aimation here rather than thier in the UI and logic part
 //The Purpose of using this as now we don't need the setState or addListener method
 class AnimatedLogo extends AnimatedWidget{
-final Tween<double> _sizeAnim = Tween<double>(begin:30,end: 180);
+final Tween<double> _sizeAnim = Tween<double>(begin:0.0,end: 400);
   AnimatedLogo(
 {Key key, Animation animation}): 
 super(key:key , listenable:animation);
@@ -77,20 +77,21 @@ super(key:key , listenable:animation);
   Widget build(BuildContext context) {
     final  Animation<double> animation = listenable;
     // TODO: implement build
-    return Opacity( 
-      opacity: animation.value,
+    return 
+    
+    // Opacity( 
+      // opacity: animation.value,
      
      //Transform.rotate roates your widget
      //angle takes up the angle values....
      // we change the begin to 30 and end to 180
-      child: Transform.rotate(
-        angle:_sizeAnim.evaluate(animation) ,
-              child: Container(
-          height: 100,
-          width: 100,
+      // child:
+       Transform.scale(
+        scale:_sizeAnim.evaluate(animation) ,
+            
           child: FlutterLogo(),
-        ),
-      ),
+       
+      // ),
     );
   }
 
