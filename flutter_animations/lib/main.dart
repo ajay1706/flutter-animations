@@ -19,9 +19,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   //firstly write this animation class
 //This is where animation starts(It will do all the stuff with values.)
-Animation<double> animation; //animation object has all the state, value and the position of the animations
+Animation<Color> animation; //animation object has all the state, value and the position of the animations
 // It doesn't know anything happening on screen as it is a abstract class
-
+//To change the color we use Color than double
 AnimationController animationController ; // Its another object which generates value & frames for the animations
  @override
   void initState() {
@@ -30,18 +30,18 @@ AnimationController animationController ; // Its another object which generates 
 
     //vsync is argument which prevents off screen animations from consuming un necessary sources
     animationController =
-             AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+             AnimationController(vsync: this, duration: Duration(milliseconds: 2500));
 
 
-             //here we are using the Tween Animation to set the begin and end duration adn you can use another like Curved too.
-                 animation = Tween<double>(begin: 0.0 , end: 1.0).animate(animationController);
+             //here we are using the Tween Animation to set the begin and end duration and you can use another like Curved too.
+                 animation = ColorTween(begin: Colors.white , end: Colors.black87).animate(animationController);
    
    
    //Now we have two types of listeners for the animation.
    //ONe is .addListener() Property whuch shows the value for each frame in the animation.
      animation.addListener((){
        setState((){
-animation.value;
+print(animation.value.toString());
        });
      });
 
@@ -58,6 +58,12 @@ animation.value;
   @override
   Widget build(BuildContext context) {
     return Center(
+      child: Container(
+        height: 100.0,
+        width:100.0,
+        color:animation.value,
+        child: FlutterLogo(),
+      ),
       
     );
   }
