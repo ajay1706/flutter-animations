@@ -30,11 +30,16 @@ AnimationController animationController ; // Its another object which generates 
 
     //vsync is argument which prevents off screen animations from consuming un necessary sources
     animationController =
-             AnimationController(vsync: this, duration: Duration(milliseconds: 3500));
+             AnimationController(vsync: this, duration: Duration(milliseconds: 2000));
 
 
              //here we are using the Tween Animation to set the begin and end duration and you can use another like Curved too.
-                 animation = Tween<double>(begin: 0.0 , end:1.0).animate(animationController);
+                //  animation = Tween<double>(begin: 0.0 , end:1.0).animate(animationController);
+
+                //lets use soe curved animation
+
+                                 animation = CurvedAnimation(parent: animationController, curve: Curves.bounceOut);
+
    
    
    //Now we have two types of listeners for the animation.
@@ -79,7 +84,10 @@ else if(status == AnimationStatus.dismissed){
 //AnimatedWidget help in creating and setting states of aimation here rather than thier in the UI and logic part
 //The Purpose of using this as now we don't need the setState or addListener method
 class AnimatedLogo extends AnimatedWidget{
-final Tween<double> _sizeAnim = Tween<double>(begin:0.0,end: 400);
+final Tween<double> _sizeAnim = Tween<double>(begin:0.0,end: 200);
+
+
+
   AnimatedLogo(
 {Key key, Animation animation}): 
 super(key:key , listenable:animation);
@@ -100,7 +108,7 @@ super(key:key , listenable:animation);
 
       //Scale animation takes up the scale param and takes the values which zooms in your flutter animation
        Transform.scale(
-        scale:_sizeAnim.evaluate(animation) ,
+        scale:animation.value  * 10,
             
           child: FlutterLogo(),
        
