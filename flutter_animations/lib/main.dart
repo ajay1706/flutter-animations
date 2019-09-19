@@ -30,7 +30,7 @@ AnimationController animationController ; // Its another object which generates 
 
     //vsync is argument which prevents off screen animations from consuming un necessary sources
     animationController =
-             AnimationController(vsync: this, duration: Duration(milliseconds: 4000));
+             AnimationController(vsync: this, duration: Duration(milliseconds: 3500));
 
 
              //here we are using the Tween Animation to set the begin and end duration and you can use another like Curved too.
@@ -46,7 +46,18 @@ AnimationController animationController ; // Its another object which generates 
 //      });
 
 //Another way to add the listener to the animation is .addStatusListener() which gets the status of the animation.
- animation.addStatusListener((staus) => print(staus));
+ 
+ 
+ // What if animation gets completed
+ animation.addStatusListener((status) {
+if(status == AnimationStatus.completed){
+  animationController.reverse();
+}
+else if(status == AnimationStatus.dismissed){
+  animationController.forward();
+}
+
+ });
 
 
  animationController.forward();
@@ -86,6 +97,8 @@ super(key:key , listenable:animation);
      //angle takes up the angle values....
      // we change the begin to 30 and end to 180
       // child:
+
+      //Scale animation takes up the scale param and takes the values which zooms in your flutter animation
        Transform.scale(
         scale:_sizeAnim.evaluate(animation) ,
             
